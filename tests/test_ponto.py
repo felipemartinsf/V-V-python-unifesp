@@ -90,3 +90,12 @@ def test_jornada_sem_adicional(): # teste de limite
     assert horas_noturnas.total_seconds() == 0
 
     return
+
+
+def test_adicional_noturno_integral_atravessando_meia_noite():
+    entradas_saidas = [
+        datetime(2023, 10, 1, 22, 0),
+        datetime(2023, 10, 2, 6, 0)
+    ]
+    horas_noturnas = calcular_adicional_noturno(entradas_saidas) # 7 horas noturnas, das 22h ate as 5.
+    assert horas_noturnas.total_seconds() == 7 * 3600
