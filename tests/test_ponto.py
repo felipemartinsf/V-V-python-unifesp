@@ -36,3 +36,10 @@ def test_atraso_dentro_da_tolerancia():
     
     atraso = calcular_atraso(esperado_entrada, realizado_entrada)
     assert atraso.total_seconds() == 0 # se for menos que 10 min, nao tem atraso
+
+def test_atraso_fora_da_tolerancia():
+    esperado_entrada = datetime(2023, 10, 1, 8, 0)
+    realizado_entrada = datetime(2023, 10, 1, 8, 15)
+    
+    atraso = calcular_atraso(esperado_entrada, realizado_entrada)
+    assert atraso.total_seconds() == 15 * 60  # 15 minutos em segundos deve retornar atraso
