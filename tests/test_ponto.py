@@ -67,3 +67,14 @@ def test_calculo_hora_extras_simples():
     carga_diaria = timedelta(hours=8) #padrao clt
     extras = calcular_horas_extras(entradas_saidas)
     assert extras.total_seconds() == 1 * 3600
+
+
+def  test_trabalho_em_dia_de_folga():
+    entradas_saidas = [
+        datetime(2023, 10, 1, 8, 0), # isso eh um domingo
+        datetime(2023, 10, 1, 12, 0)
+    ]
+    horas = calcular_horas_trabalhadas(entradas_saidas)
+    carga_diaria = timedelta(hours=8) #padrao clt
+    extras = calcular_horas_extras(horas, carga_diaria)
+    assert extras.total_seconds() == 4  * 3600 # tudo tem que ser extra em domingo
