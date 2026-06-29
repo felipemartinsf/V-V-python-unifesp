@@ -1,6 +1,6 @@
 import pytest
 from datetime import datetime, timedelta
-from calcular_ponto import calcular_horas_trabalhadas, calcular_atraso, calcular_horas_extras
+from calcular_ponto import calcular_horas_trabalhadas, calcular_atraso, calcular_horas_extras, calcular_adicional_noturno
 
 def test_calculo_jornada_normal_sem_atraso():
 
@@ -78,3 +78,15 @@ def  test_trabalho_em_dia_de_folga():
     carga_diaria = timedelta(hours=8) #padrao clt
     extras = calcular_horas_extras(horas, carga_diaria)
     assert extras.total_seconds() == 4  * 3600 # tudo tem que ser extra em domingo
+
+# TESTE NOTURNO
+
+def test_jornada_sem_adicional(): # teste de limite
+    entradas_saidas = [
+        datetime(2023, 10, 1, 14, 0),
+        datetime(2023, 10, 1, 22, 0) # encerra no limite da hora extra noturna
+    ]
+    horas_noturnas = calcular_adicional_noturno(entradas_saidas)
+    assert horas_noturnas.total_seconds() == 0
+
+    return

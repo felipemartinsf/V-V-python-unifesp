@@ -7,3 +7,6 @@ def calcular_atraso():
 
 def calcular_horas_extras():
     return
+
+def calcular_adicional_noturno():
+    return
