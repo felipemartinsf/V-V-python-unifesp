@@ -4,3 +4,6 @@ def calcular_horas_trabalhadas():
 
 def calcular_atraso():
     return
+
+def calcular_horas_extras():
+    return

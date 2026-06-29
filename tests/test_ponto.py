@@ -1,7 +1,7 @@
-# test_ponto.py
 import pytest
-from datetime import datetime
-from calcular_ponto import calcular_horas_trabalhadas, calcular_atraso
+from datetime import datetime, timedelta
+from calcular_ponto import calcular_horas_trabalhadas, calcular_atraso, calcular_horas_extras
+
 def test_calculo_jornada_normal_sem_atraso():
 
     entradas_saidas = [
@@ -51,3 +51,19 @@ def test_saida_antecipada_gera_horas_devedoras():
     
     atraso = calcular_atraso(esperado_saida, realizado_saida, is_saida=True)
     assert atraso.total_seconds() == 30 * 60 # esperando o atraso alto
+
+
+# TESTES DE EXTRAS
+
+def test_calculo_hora_extras_simples():
+    # Jornada de 1h extra
+    entradas_saidas = [
+        datetime(2023, 10, 1, 8, 0),
+        datetime(2023, 10, 1, 12, 0),
+        datetime(2023, 10, 1, 13, 0),
+        datetime(2023, 10, 1, 18, 0)
+    ]    
+    horas_totais = calcular_horas_trabalhadas(entradas_saidas)
+    carga_diaria = timedelta(hours=8) #padrao clt
+    extras = calcular_horas_extras(entradas_saidas)
+    assert extras.total_seconds() == 1 * 3600
