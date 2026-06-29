@@ -43,3 +43,11 @@ def test_atraso_fora_da_tolerancia():
     
     atraso = calcular_atraso(esperado_entrada, realizado_entrada)
     assert atraso.total_seconds() == 15 * 60  # 15 minutos em segundos deve retornar atraso
+
+
+def test_saida_antecipada_gera_horas_devedoras():
+    esperado_saida = datetime(2023, 10, 1, 17, 0)
+    realizado_saida = datetime(2023, 10, 1, 16, 30)
+    
+    atraso = calcular_atraso(esperado_saida, realizado_saida, is_saida=True)
+    assert atraso.total_seconds() == 30 * 60 # esperando o atraso alto
