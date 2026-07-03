@@ -119,3 +119,15 @@ def test_fluxo_bater_ponto_e_sair(mock_input, mock_datetime, capsys):
     
     assert "Ponto registrado: 2023-10-25 08:00:00" in tela_do_terminal 
     assert "Encerrando o sistema..." in tela_do_terminal
+
+
+
+@patch('main.datetime')
+@patch('builtins.input')
+def test_exibir_espelho_sem_pontos(mock_input, mock_datetime, capsys):
+    mock_input.side_effect = ['2', '3'] # sem nenhum ponto
+    
+    main()
+    
+    tela_do_terminal = capsys.readouterr().out
+    assert "Nenhum ponto registrado hoje." in tela_do_terminal
