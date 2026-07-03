@@ -1,6 +1,8 @@
 import pytest
 from datetime import datetime, timedelta
 from calcular_ponto import calcular_horas_trabalhadas, calcular_atraso, calcular_horas_extras, calcular_adicional_noturno
+from unittest.mock import patch
+from main import main # Importa a sua função principal
 
 def test_calculo_jornada_normal_sem_atraso():
 
@@ -99,3 +101,21 @@ def test_adicional_noturno_integral_atravessando_meia_noite():
     ]
     horas_noturnas = calcular_adicional_noturno(entradas_saidas) # 7 horas noturnas, das 22h ate as 5.
     assert horas_noturnas.total_seconds() == 7 * 3600
+
+
+
+
+@patch('main.datetime') # duble relógio do sistema
+@patch('builtins.input') # duble para o usuário digitando no teclado
+def test_fluxo_bater_ponto_e_sair(mock_input, mock_datetime, capsys):
+    data_falsa = datetime(2023, 10, 25, 8, 0, 0)
+    mock_datetime.now.return_value = data_falsa # mockando o horario pra uma hora falsa
+    
+    mock_input.side_effect = ['1', '3'] # usuario batendo ponto
+    
+    main() # rodar o main para ele testar com o mockado
+    
+    tela_do_terminal = capsys.readouterr().out # pegar o que foi cuspido do main()
+    
+    assert "Ponto registrado: 2023-10-25 08:00:00" in tela_do_terminal 
+    assert "Encerrando o sistema..." in tela_do_terminal
