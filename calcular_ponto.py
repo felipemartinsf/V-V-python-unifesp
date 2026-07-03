@@ -10,3 +10,8 @@ def calcular_horas_extras():
 
 def calcular_adicional_noturno():
     return
+
+def verify_dia_descanso():
+    # deve ter  condição A (is_domingo) , Condição B (is_feriado) 
+
+    return
