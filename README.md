@@ -98,13 +98,4 @@ Isso executa:
 - Dia de descanso (domingo ou feriado): **todo** tempo trabalhado conta como
   hora extra.
 
-## Nota sobre um ajuste feito no teste original
 
-Em `test_ponto.py`, o teste `test_trabalho_em_dia_de_folga` chamava
-`calcular_horas_extras(horas, carga_diaria)` passando dois `timedelta` — mas
-não há como saber que o dia era domingo a partir só de dois `timedelta` (não
-tem nenhuma data ali). Ajustei a chamada para
-`calcular_horas_extras(horas, carga_diaria, is_dia_de_descanso=True)`, deixando
-explícito o que o teste já pressupunha implicitamente. Também corrigi o
-`main.py`, que importava de `calculador_ponto` (nome de arquivo inexistente)
-em vez de `calcular_ponto`.
