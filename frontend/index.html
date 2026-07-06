@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relógio de Ponto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="painel">
+
+  <header class="painel__topo">
+    <span class="painel__eyebrow">SISTEMA DE PONTO</span>
+    <div id="relogio" class="relogio-digital">--:--:--</div>
+  </header>
+
+  <section class="cartao">
+    <label class="campo">
+      <span>Funcionário</span>
+      <select id="select-funcionario"></select>
+    </label>
+
+    <div class="cartao__acoes">
+      <button id="btn-cadastrar" class="btn btn--fantasma">+ Novo funcionário</button>
+      <button id="btn-bater-ponto" class="btn btn--principal">BATER PONTO</button>
+    </div>
+
+    <label class="campo campo--checkbox">
+      <input type="checkbox" id="check-feriado">
+      <span>Hoje é feriado</span>
+    </label>
+  </section>
+
+  <section class="cartao cartao--espelho">
+    <div class="espelho__header">
+      <h2>Espelho do dia</h2>
+      <input type="date" id="input-data">
+    </div>
+
+    <div id="espelho-conteudo" class="espelho__vazio">
+      Selecione um funcionário para ver o espelho de ponto.
+    </div>
+  </section>
+
+</div>
+
+<template id="tpl-marcacao">
+  <div class="ticket">
+    <span class="ticket__tipo"></span>
+    <span class="ticket__hora"></span>
+  </div>
+</template>
+
+<dialog id="dialog-cadastro">
+  <form id="form-cadastro" class="form-cadastro">
+    <h3>Novo funcionário</h3>
+    <label class="campo">
+      <span>Nome</span>
+      <input type="text" id="input-nome" required>
+    </label>
+    <label class="campo">
+      <span>Matrícula</span>
+      <input type="text" id="input-matricula" required>
+    </label>
+    <div class="form-cadastro__acoes">
+      <button type="button" id="btn-cancelar" class="btn btn--fantasma">Cancelar</button>
+      <button type="submit" class="btn btn--principal">Cadastrar</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="script.js"></script>
+</body>
+</html>
